@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'weather_app/style.css' %}">
+</head>
+<body>
+    <!-- Background video -->
+    <video autoplay muted loop id="bg-video">
+        <source src="{% static 'weather_app/videos/'|add:background_class|add:'.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="main-container">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="city" placeholder="Enter city name" required>
+            <button type="submit">Check</button>
+        </form>
+
+        {% if error %}
+            <div class="card glass">
+                <p class="error">{{ error }}</p>
+            </div>
+        {% elif current_weather %}
+            <div class="card glass">
+                <h2>{{ current_weather.city }}</h2>
+                <img src="https://openweathermap.org/img/wn/{{ current_weather.icon }}@2x.png" alt="Weather Icon">
+                <p>{{ current_weather.description }}</p>
+                <h1>{{ current_weather.temperature }}°C</h1>
+            </div>
+
+            <div class="forecast-container">
+                {% for day in forecast_data %}
+                    <div class="forecast-card glass">
+                        <p>{{ day.date }}</p>
+                        <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="Icon">
+                        <p>{{ day.desc }}</p>
+                        <h3>{{ day.temp }}°C</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card glass">
+                <h2>Welcome to Weather App</h2>
+                <p>Enter a city to get the current weather.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
