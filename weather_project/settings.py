@@ -22,8 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-fallback-dev-key')
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://weather-app-v7ko.onrender.com']
-
+ALLOWED_HOSTS = ['127.0.0.1','weather-app-ub2e.onrender.com']
 
 # Application definition
 
