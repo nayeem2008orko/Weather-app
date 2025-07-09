@@ -20,9 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-fallback-dev-key')
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost','your-render-url.onrender.com','yourcustomdomain.com']
 
 
 # Application definition
